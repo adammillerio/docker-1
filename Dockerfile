@@ -4,8 +4,8 @@ RUN apt-get update && apt-get install -y git curl gnupg && rm -rf /var/lib/apt/l
 
 ARG user=jenkins
 ARG group=jenkins
-ARG uid=10001
-ARG gid=10001
+ARG uid=99
+ARG gid=100
 ARG http_port=8080
 ARG agent_port=50000
 
@@ -41,10 +41,10 @@ COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groov
 
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.60.3}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.89.4}
 
 # jenkins.war checksum, download will be validated using it
-ARG JENKINS_SHA=2d71b8f87c8417f9303a73d52901a59678ee6c0eefcf7325efed6035ff39372a
+ARG JENKINS_SHA=1d893aa30e49a3130e4f90268044dafb34f7c32b573970f2acca8c2c821f9b53
 
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
