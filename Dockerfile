@@ -27,6 +27,13 @@ VOLUME /var/jenkins_home
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
+# Install Docker
+ARG DOCKER_VERSION=18.06.1-ce
+RUN curl -o /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz && \
+  tar -xf /tmp/docker.tgz -C /tmp && \
+  cp /tmp/docker/* /usr/bin/ && \
+  rm -rf /tmp/docker /tmp/docker.tgz
+
 # Use tini as subreaper in Docker container to adopt zombie processes
 ARG TINI_VERSION=v0.16.1
 COPY tini_pub.gpg /var/jenkins_home/tini_pub.gpg
